@@ -38,8 +38,12 @@ The only way to work with a discrete set of states would be to ensure that the s
 
 We could also just do a masked sequence modeling instance where the output is the $d$ dimensional state representation and use the MSE loss.
 
-
-
 This is another possibility: https://boyuan.space/diffusion-forcing/
 
 - Improvements on using diffusion models for sequence modelling
+
+Consider Mamba/S4 - [GitHub - state-spaces/mamba: Mamba SSM architecture](https://github.com/state-spaces/mamba)
+
+
+
+[Generative Marginalization Models](https://proceedings.mlr.press/v235/liu24az.html)

@@ -1,7 +1,8 @@
 import warnings
 from typing import *
 
-from transformers import *
+# from transformers import *
+from transformers.pipelines import Pipeline
 from transformers.feature_extraction_utils import *
 from transformers.pipelines.base import *
 from transformers.pipelines.base import _ScikitCompat

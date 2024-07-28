@@ -44,6 +44,42 @@ This is another possibility: https://boyuan.space/diffusion-forcing/
 
 Consider Mamba/S4 - [GitHub - state-spaces/mamba: Mamba SSM architecture](https://github.com/state-spaces/mamba)
 
-
-
 [Generative Marginalization Models](https://proceedings.mlr.press/v235/liu24az.html)
+
+- This is an interesting paper that makes me think I need to look into AutoRegressive models more for this type of sequential modeling - specifically rhose that ahve been good for protein modeling
+
+- It requires that within the $D$ dimensions of the input vector $x$, each of the $D$ dimensions has a discrete set of values. I wonder if chess can be transformed to this.
+  
+  - Something like [piece, colour, original position, ending position, piece captured]
+
+- The work here seems to mask out portions of the input $x$ and predict the marginals of the non-masked by summing over the masked
+  
+  - since these are used for protein synthesis, its possible that the $x$ vector is the sequence itself - in which case this could be good for state space simulation such as this
+
+
+
+
+
+Initial tests with a reworked version of RoBERTa had some success. Modelled a game for a bit and then lost consistency. EIther undertraining or the model isn't powerful enough.
+
+
+
+2 things to try:
+
+- Train more (seems to overfit after 900 ish steps)
+
+- Change how the ratings are added as conditionals to the embeddings
+  
+  - Idea: add them in somewhere else so the moves are embedded conditional on the ratings of the players
+  
+  - Idea: transform the summed embeddings through one more layer
+
+
+
+So i trained more to 1200 steps and the simulator played a coherent game but the conditionals on the ratings did not work very well as an 800 rating white player demolished a 1700 rating black player.
+
+
+
+I need to change how the ratings are added for conditionals. I can try it for the encoder soon but first I will try changing how the embeddings get conditioned on the player ratings.
+
+- Making the embeddings conditional on the player ratings may not be the best call because it means that the actual sequences of vectors modelled depend on the ratings rather than which sequence is chosen next which is why it would be better to put it in the encoder - but i will try the embeddings one more time

@@ -1,0 +1,12 @@
+#!/bin/bash
+#SBATCH --job-name=seqsim_context
+#SBATCH --gres=gpu:rtx6000:1
+#SBATCH --qos=m3
+#SBATCH --time=4:00:00
+#SBATCH -c 30
+#SBATCH --mem=60G
+#SBATCH --output=slurm/slurm-%j.out
+#SBATCH --error=slurm/slurm-%j.err
+
+# put your command here
+python3 train_context_sim.py
